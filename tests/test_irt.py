@@ -406,3 +406,18 @@ class TestAdaptiveSession:
         engine.add_question(q)
         assert "test_q" in engine.questions
         assert engine.questions["test_q"].difficulty == 0.5
+
+    def test_non_finite_mle_falls_back_to_prior(self, engine: IRTEngine):
+        """Non-finite MLE result should fall back to theta=0.0."""
+        from unittest.mock import patch
+
+        responses = [
+            Response(question_id="q1", correct=True, difficulty=0.0, discrimination=1.0),
+            Response(question_id="q2", correct=False, difficulty=1.0, discrimination=1.0),
+        ]
+
+        # Mock minimize_scalar to return NaN
+        mock_result = type("Result", (), {"x": float("nan")})()
+        with patch("src.irt.minimize_scalar", return_value=mock_result):
+            est = engine.estimate_ability(responses)
+        assert est.theta == 0.0

@@ -415,6 +415,15 @@ class TestSimulateEndpoint:
         resp = await client.get("/simulate?true_theta=10.0")
         assert resp.status_code == 422
 
+    @pytest.mark.asyncio
+    async def test_simulate_pool_exhaustion(self, client: AsyncClient):
+        """Simulation should stop early when pool is smaller than num_questions."""
+        resp = await client.get("/simulate?num_questions=10&pool_size=3")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["questions_used"] == 3
+        assert len(data["history"]) == 3
+
 
 # ---------------------------------------------------------------
 # Input validation
@@ -501,3 +510,25 @@ class TestSessionLimits:
         )
         assert resp.status_code == 201
         assert "irt_expired" not in sessions
+
+
+# ---------------------------------------------------------------
+# Global exception handler
+# ---------------------------------------------------------------
+
+
+class TestExceptionHandler:
+    @pytest.mark.asyncio
+    async def test_unhandled_exception_returns_500(self):
+        """Unhandled exceptions should return 500 without stack traces."""
+        from unittest.mock import patch
+
+        transport = ASGITransport(app=app, raise_app_exceptions=False)
+        async with AsyncClient(transport=transport, base_url="http://test") as c:
+            with patch("src.server._evict_expired_sessions", side_effect=RuntimeError("boom")):
+                resp = await c.post(
+                    "/sessions",
+                    json={"question_pool": SAMPLE_POOL},
+                )
+        assert resp.status_code == 500
+        assert resp.json() == {"detail": "Internal server error"}

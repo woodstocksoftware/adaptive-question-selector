@@ -265,7 +265,7 @@ python -m pytest tests/ -v
 python -m pytest tests/ -v --cov=src --cov-report=term-missing
 ```
 
-69 tests with 98% coverage:
+72 tests with 99% coverage:
 - IRT probability calculations and overflow protection
 - MLE ability estimation (normal, all-correct, all-incorrect, empty)
 - Fisher information computation
