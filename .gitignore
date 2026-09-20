@@ -10,3 +10,12 @@ build/
 .ruff_cache/
 .coverage
 htmlcov/
+
+# Build/test artifacts
+report/
+coverage/
+.coverage.*
+.firecrawl/
+*.tsbuildinfo
+.claude/settings.local.json
+.claude/worktrees/
