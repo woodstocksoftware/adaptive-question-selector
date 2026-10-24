@@ -7,6 +7,8 @@ Production-grade adaptive testing engine powered by Item Response Theory (IRT). 
 [![IRT 2PL Model](https://img.shields.io/badge/IRT-2PL%20Model-purple.svg)](#mathematical-foundation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+Part of [AdaptiveTest developer API](https://adaptivetest.io/developers), built by Desert's Edge Solutions.
+
 ---
 
 ## What is Adaptive Testing?
