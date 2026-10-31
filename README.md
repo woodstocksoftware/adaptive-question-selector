@@ -20,7 +20,7 @@ Traditional tests give every student the same questions. Adaptive tests are smar
 3. **Student answers** incorrectly → next question is easier
 4. **Converge** on the student's ability, stopping once the estimate is precise enough
 
-This is the same approach used by the GRE, GMAT, and many standardized assessments. The underlying math is **Item Response Theory (IRT)** — a psychometric framework that models the relationship between student ability and question difficulty.
+Large exams use adaptive designs too: the GMAT adapts question by question, as this engine does, while the GRE adapts section by section, choosing the second section's difficulty from the first. For the method and simulation numbers, see [What is computerized adaptive testing?](https://adaptivetest.io/learn/what-is-computerized-adaptive-testing) The underlying math is **Item Response Theory (IRT)** — a psychometric framework that models the relationship between student ability and question difficulty.
 
 ```
 Student answers → Update ability estimate → Select optimal next question → Repeat
