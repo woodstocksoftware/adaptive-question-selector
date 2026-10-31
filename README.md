@@ -1,6 +1,6 @@
 # Adaptive Question Selector
 
-Production-grade adaptive testing engine powered by Item Response Theory (IRT). Dynamically selects optimal questions based on real-time student ability estimation, delivering precise assessments in fewer questions than traditional fixed-length tests.
+Production-grade adaptive testing engine powered by Item Response Theory (IRT). Dynamically selects optimal questions based on real-time student ability estimation. In simulation it needs far fewer questions than a fixed-length test for students well above or below average, and about as many in the middle, where a well-targeted fixed form is already efficient.
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-green.svg)](https://fastapi.tiangolo.com)
@@ -18,7 +18,7 @@ Traditional tests give every student the same questions. Adaptive tests are smar
 1. **Start** with a medium-difficulty question
 2. **Student answers** correctly → next question is harder
 3. **Student answers** incorrectly → next question is easier
-4. **Converge** on the student's true ability in fewer questions
+4. **Converge** on the student's ability, stopping once the estimate is precise enough
 
 This is the same approach used by the GRE, GMAT, and many standardized assessments. The underlying math is **Item Response Theory (IRT)** — a psychometric framework that models the relationship between student ability and question difficulty.
 
